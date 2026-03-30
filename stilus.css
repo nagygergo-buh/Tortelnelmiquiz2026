@@ -1,4 +1,4 @@
-.kiskep{
+.kisKep{
     width: 80px;
 }
 #kepekHelye{
@@ -7,4 +7,13 @@
 }
 h1{
     text-align: center;
+}
+#nagyKep{
+    text-align: center;
+    margin-top: 30px;
+    
+}
+#gombokHelye{
+    text-align: center;
+    margin-top: 30px;
 }
