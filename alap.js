@@ -1,10 +1,12 @@
+let valaszOsszes=0
+let valaszJo=0
 let elozo=-1
 let sz=""
 let sorszam=0
 for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 4; j++) {
         sz+=`
-        <img src="kepek/a${sorszam}.jpg" alt="kep" class="kisKep" onclick="nagyit(${sorszam})"onmouseover="szegelyRajzol(${sorszam})" id="${sorszam}"onmouseleave="szegelyLevesz(${sorszam})" id="${sorszam}" stlye="border: 2px solid white">
+        <img src="kepek/a${sorszam}.jpg" alt="kep" class="kisKep" onclick="nagyit(${sorszam})"onmouseover="szegelyRajzol(${sorszam})" id="${sorszam}"onmouseleave="szegelyLevesz(${sorszam})" id="${sorszam}" style="border: 2px solid white">
         
         `
         sorszam++
@@ -46,16 +48,38 @@ function nagyit(szam){
     let gombok=""
     for (let i = 0; i < 4; i++) {
         gombok+=`
-        <button onclick="ertekel('${szavakTomb[i]}')">${szavakTomb[i]}</button>
+        <button onclick="ertekel('${szavakTomb[i]}',${szam})">${szavakTomb[i]}</button>
         `
 
     }
-    document.getElementById('gombokHelye').innerHTML=gombok
+    document.getElementById('gombokHelye').innerHTML=gombok}
 
-    function ertekel(szemely){
-        alert(szemely)
+function ertekel(szemely,szam){
+        //alert(szemely)
+        //alert(szam)
+        valaszOsszes+=1
+        if(szemely==nevekTomb[szam].megoldas){
+            alert(`Gartulalok, jó válasz ${pozitivTomb[Math.floor(Math.random()*pozitivTomb.length)]}`)
+            Swal.fire({
+                title: 'Hello!',
+                text: 'Ez egy szép alert 😌',
+                icon: 'success',
+                confirmButtonText: 'OK'
+              });
+            valaszJo+=1
     }
+    else{
+        alert(`naur ${negativTomb[Math.floor(Math.random()*negativTomb.length)]}`)
+        Swal.fire({
+            title: 'Hello!',
+            text: `naur ${negativTomb[Math.floor(Math.random()*negativTomb.length)]}`,
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+    }
+    document.getElementById('valasz').innerHTML=`Eredmény ${valaszJo} jó válasz: ${valaszOsszes} kérdésből. Százalékos eredmény: ${valaszJo/valaszOsszes*100}%`
 }
+
 function szegelyRajzol(szam){
 document.getElementById(szam).style.border="2px solid cyan"
 }
