@@ -1,9 +1,11 @@
+let elozo=-1
 let sz=""
 let sorszam=0
 for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 4; j++) {
         sz+=`
-        <img src="kepek/a${sorszam}.jpg" alt="kep" class="kisKep" onclick="nagyit(${sorszam})">
+        <img src="kepek/a${sorszam}.jpg" alt="kep" class="kisKep" onclick="nagyit(${sorszam})"onmouseover="szegelyRajzol(${sorszam})" id="${sorszam}"onmouseleave="szegelyLevesz(${sorszam})" id="${sorszam}" stlye="border: 2px solid white">
+        
         `
         sorszam++
     }
@@ -12,12 +14,17 @@ for (let i = 0; i < 3; i++) {
 document.getElementById("kepekHelye").innerHTML=sz
 
 function nagyit(szam){
+    if(elozo!=-1){
+        document.getElementById(elozo).style.filter="invert(0%)"
+    }
+    elozo=szam
+    document.getElementById(szam).style.filter="invert(100%)"
     let sz=""
     sz+=`
     <img src="kepek/a${szam}.jpg" alt="">
     `
     document.getElementById('nagyKep').innerHTML=sz
-
+    document.getElementById('Kerdes').innerHTML="Ki ez a személy?"
     //keverés
     let szavakTomb=[]
     szavakTomb.push(nevekTomb[szam].megoldas)
@@ -49,3 +56,9 @@ function nagyit(szam){
         alert(szemely)
     }
 }
+function szegelyRajzol(szam){
+document.getElementById(szam).style.border="2px solid cyan"
+}
+function szegelyLevesz(szam){
+    document.getElementById(szam).style.border="2px solid white"
+    }
